@@ -29,7 +29,7 @@
                         <tr>
                           <th scope="col">Train Name</th>
                           <th scope="col">Destination</th>
-                          <th scope="col">Frequency (min)</th>
+                          <th scope="col">Frequency (mins)</th>
                           <th scope="col">Next Arrival Time:</th>
                           <th scope="col">Minutes away:</th>
                         </tr>
@@ -42,11 +42,40 @@
                 </div>
               </div>
               </div>
+    
+        <!--Area for user input-->
+        <div class="search border mt-5">
+                <div class="col col-12">
+                    <form>
+                        <div class="form-group mt-3">
+                          <label for="exampleInputEmail1">Add Train</label>
+                          <input type="name" class="form-control" id="train-name-input" aria-describedby="train-name-input" placeholder="Train Name">
+                        </div>
+                        <div class="form-group">
+                          <label for="destination">Destination</label>
+                          <input type="text" class="form-control" id="destination" placeholder="Where are you going?">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="start-time">First Train Time (HH:mm - military time)</label>
+                            <input type="time" class="form-control" id="train-start-time" placeholder="">
+                          </div>
+        
+                          <div class="form-group">
+                              <label for="employee-rate">Frequency (mins)</label>
+                              <input type="number" class="form-control" id="frequency" placeholder="Minutes">
+                            </div>
+                        
+                        <button type="submit" class="btn btn-primary mb-3" id="submit">Submit</button>
+                      </form>
+                </div>
+              </div>
 
-
-
-
+              <footer class="space"> </footer>
     </div>
+
+    
+    <footer class="space"> </footer>
    
     <script src="assets/javascript/app.js"></script>    
 </body>
