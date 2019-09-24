@@ -1,5 +1,5 @@
 var config = {
-
+ 
 };
 
 
@@ -27,7 +27,7 @@ $(document).ready(function () {
     destinationAny = "";
     trainTime = "";
     frequencyMins = "";
-    minsAway = "";
+  
 
   });
 
@@ -40,31 +40,33 @@ $(document).ready(function () {
     var row = $('<tr>')
     row.appendTo("#table-body");
 
-    var cell1 = $('<td>');
-    cell1.text(childSnapshot.child("trainName").val())
-    cell1.appendTo(row);
-    var cell2 = $("<td>");
-    cell2.text(childSnapshot.child("destination").val())
-    cell2.appendTo(row);
-    var cell3 = $("<td>");
-    cell3.text(childSnapshot.child("frequency").val())
-    cell3.appendTo(row);
+    var row1 = $('<td>');
+    row1.text(childSnapshot.child("trainName").val())
+    row1.appendTo(row);
 
-/*
-    var cell4 = $("<td>");
-    var date1 = childSnapshot.child("time").val();
-    var convertedTime = moment(time, );
-    var arrivalTime = convertedTime.diff(moment(), "minutes");
-    cell4.appendTo(row);
+    var row2 = $("<td>");
+    row2.text(childSnapshot.child("destination").val())
+    row2.appendTo(row);
 
-    var cell5 = $("<td>");
-    cell5.text(childSnapshot.child("rate").val())
-    cell5.appendTo(row);
+    var row3 = $("<td>");
+    row3.text(childSnapshot.child("frequency").val())
+    row3.appendTo(row);
 
-    var cell6 = $("<td>");
-    x = childSnapshot.child("rate").val()
-    cell6.text("$" + y);
-    cell6.appendTo(row); */
+    var row4 = $("<td>");
+    row4.text(childSnapshot.child("time").val());
+    row4.appendTo(row);
+
+     /* var convertedTime = moment(time, );
+    var arrivalTime = convertedTime.diff(moment(), "minutes"); */
+
+    /* var row5 = $("<td>");
+    row5.text(childSnapshot.child("time???").val())
+    row5.appendTo(row);
+
+    var row6 = $("<td>");
+    x = childSnapshot.child("time???").val()
+    row6.text();
+    row6.appendTo(row); */
 
   }) 
 
