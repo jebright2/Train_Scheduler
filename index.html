@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
+    <title>Train Scheduler</title>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid text-center header">
+            <h1 class="display-4">All Aboard, your train is coming!</h1>
+            <p class="lead">Hard to stop a moving train; be on time!</p>
+        </div>
+
+        <!---Area where train information is stored-->
+        <div class="search border">
+                <div class="row">
+                  <div class="col">
+                <div class="form-group">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Train Name</th>
+                          <th scope="col">Destination</th>
+                          <th scope="col">Frequency (mins)</th>
+                          <th scope="col">Next Arrival Time:</th>
+                          <th scope="col">Minutes away:</th>
+                        </tr>
+                      </thead>
+                      <tbody id="table-body">
+                       
+                      </tbody>
+                    </table>
+                </div>
+                </div>
+              </div>
+              </div>
+    
+        <!--Area for user input-->
+        <div class="search border mt-5">
+                <div class="col col-12">
+                    <form>
+                        <div class="form-group mt-3">
+                          <label for="train-name">Add Train</label>
+                          <input type="name" class="form-control" id="train-name-input" aria-describedby="train-name-input" placeholder="Train Name">
+                        </div>
+                        <div class="form-group">
+                          <label for="destination">Destination</label>
+                          <input type="text" class="form-control" id="destination" placeholder="Where are you going?">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="start-time">First Train Time (HH:mm - military time)</label>
+                            <input type="time" class="form-control" id="train-start-time" placeholder="">
+                        </div>
+        
+                        <div class="form-group">
+                              <label for="frequency">Frequency (mins)</label>
+                              <input type="number" class="form-control" id="frequency" placeholder="Minutes">
+                        </div>
+
+                        <div class="form-group">
+                                <label for="frequency">Next Train (mins)</label>
+                                <input type="number" class="form-control" id="nextTrain" placeholder="Minutes">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary mb-3" id="submit">Submit</button>
+                      </form>
+                </div>
+              </div>
+
+            
+    </div><br>
+
+    
+    
+   
+    <script src="assets/javascript/app.js"></script>    
+</body>
+</html>
