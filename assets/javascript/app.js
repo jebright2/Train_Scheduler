@@ -31,7 +31,8 @@ $("#train-input").val("");
 $("#destination").val("");
 $("#train-start-time").val("");
 $("#frequency").val("");
-  //---------------------------------------------------------------------
+
+//---------------------------------------------------------------------
 
 database.ref().push({
   trainName: trainName,
@@ -49,7 +50,7 @@ database.ref().on("child_added", function(childSnapshot) {
   trainTime = childSnapshot.val().trainTime;
   frequency = childSnapshot.val().frequency;
 
-  var trainTimeMoment = moment(trainTime, "HH:mm");
+  var trainTimeMoment = moment(trainTime, "HH:mm").subtract(1, "years");
   var currentTime = moment();
   var minuteArrival = currentTime.diff(trainTimeMoment, 'minutes');
   var minuteLast = minuteArrival % frequency;
@@ -58,7 +59,9 @@ database.ref().on("child_added", function(childSnapshot) {
   var arrivaltime = nextArrival.format("HH:mm");
 //---------------------------------------------------------------------
   $("#table-body").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + arrivaltime + "</td><td>" + awayTrain + "</td>");
+  // $("#table-body").css('color', 'white');
 
+  // $(".table").css('opacity:0.9%');
 
   }, function(errorObject) {
       console.log("Errors handled: " + errorObject.code);
