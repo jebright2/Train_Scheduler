@@ -7,76 +7,59 @@ var config = {
   messagingSenderId: "247460823980",
   appId: "1:247460823980:web:9b0a2b8102321c6dd67009"
 };
+//---------------------------------------------------------------------
+
+firebase.initializeApp(config);
+var database = firebase.database();
+//---------------------------------------------------------------------
+
+var trainName = "";
+var destination = "";
+var trainTime = "";
+var frequency = "";
+//---------------------------------------------------------------------
+
+$("#submit").on("click", function(event){
+event.preventDefault(); 
+
+trainName = $("#train-input").val().trim();
+destination = $("#destination").val().trim();
+trainTime = $("#train-start-time").val().trim();
+frequency = $("#frequency").val().trim();
+
+$("#train-input").val("");
+$("#destination").val("");
+$("#train-start-time").val("");
+$("#frequency").val("");
+  //---------------------------------------------------------------------
+
+database.ref().push({
+  trainName: trainName,
+  destination: destination,
+  trainTime: trainTime,
+  frequency: frequency
+});
+});
 
 
-$(document).ready(function () {
-  firebase.initializeApp(config);
-  var database = firebase.database();
-
-  $("#submit").on("click", function () {
-    event.preventDefault();
-    var trainInput = $("#train-name-input").val();
-    var destinationAny = $("#destination").val();
-    var trainTime = $("#train-start-time").val();
-    var frequencyMins = $("#frequency").val();
-    
-
-    database.ref("train-schedule").push({
-      trainName: trainInput,
-      destination: destinationAny,
-      time: trainTime,
-      frequency: frequencyMins,
-      
-    });
-
-    trainInput = "";
-    destinationAny = "";
-    trainTime = "";
-    frequencyMins = "";
+database.ref().on("child_added", function(childSnapshot) {
   
+  trainName = childSnapshot.val().trainName;
+  destination = childSnapshot.val().destination
+  trainTime = childSnapshot.val().trainTime;
+  frequency = childSnapshot.val().frequency;
 
-  });
+  var trainTimeMoment = moment(trainTime, "HH:mm");
+  var currentTime = moment();
+  var minuteArrival = currentTime.diff(trainTimeMoment, 'minutes');
+  var minuteLast = minuteArrival % frequency;
+  var awayTrain = frequency - minuteLast;
+  var nextArrival = currentTime.add(awayTrain, 'minutes');
+  var arrivaltime = nextArrival.format("HH:mm");
+//---------------------------------------------------------------------
+  $("#table-body").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + arrivaltime + "</td><td>" + awayTrain + "</td>");
 
-  var arrivalTime;
-  var x;
 
-  database.ref("train-schedule").on("child_added", function (childSnapshot) {
-
-
-    var row = $('<tr>')
-    row.appendTo("#table-body");
-
-    var row1 = $('<td>');
-    row1.text(childSnapshot.child("trainName").val())
-    row1.appendTo(row);
-
-    var row2 = $("<td>");
-    row2.text(childSnapshot.child("destination").val())
-    row2.appendTo(row);
-
-    var row3 = $("<td>");
-    row3.text(childSnapshot.child("frequency").val())
-    row3.appendTo(row);
-
-    /* var row4 = $("<td>");
-    row4.text(childSnapshot.child("time").val());
-    row4.appendTo(row);
-
-    var convertedTime = moment(time, );
-    var arrivalTime = convertedTime.diff(moment(), "minutes"); 
-
-    var row5 = $("<td>");
-    row5.text(childSnapshot.child("time???").val())
-    row5.appendTo(row);
-
-    var row6 = $("<td>");
-    x = childSnapshot.child("time???").val()
-    row6.text();
-    row6.appendTo(row); */
-
-  }) 
-
-}, function(errorObject) {
-  console.log("Errors handled: " + errorObject.code);
-
-})
+  }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+});
